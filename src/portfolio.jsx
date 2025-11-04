@@ -11,6 +11,24 @@ export default function Portfolio() {
       author: "Jun Jun Zaragosa",
       position: "Software Engineer Lead at FullSuite",
     },
+    {
+      quote:
+        "Working with him was a game-changer for our project. His attention to detail and problem-solving skills are exceptional.",
+      author: "Angel Hamelton Yacapin",
+      position: "Software Engineer at FullSuite",
+    },
+    {
+      quote:
+        "A true professional who brings innovative solutions to complex challenges. His code is clean, efficient, and well-documented.",
+      author: "Allen Alvaro",
+      position: "Software Engineer at FullSuite",
+    },
+    {
+      quote:
+        "Not only technically skilled but also great at communication. He made the entire development process smooth and collaborative.",
+      author: "Neil Pascual",
+      position: "Co-Intern at FullSuite",
+    },
   ];
 
   const techStack = {
@@ -40,9 +58,9 @@ export default function Portfolio() {
 
   const projects = [
     {
-      name: "SuiteTest",
-      description: "Online test and quiz platform",
-      url: "suite-test-frontend.vercel.app",
+      name: "CafeNova",
+      description: "Coffee Shop POS System",
+      url: "coffee-shop-frontend.vercel.app",
     },
     {
       name: "Dental Booking System",
@@ -280,12 +298,15 @@ export default function Portfolio() {
                       <motion.span
                         key={i}
                         className="bg-gray-100 px-2.5 py-1 rounded text-xs border border-gray-200 cursor-pointer"
-                        variants={techItemVariants}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover="hover"
-                        custom={i}
-                        transition={{ delay: i * 0.1 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{
+                          scale: 1.05,
+                          backgroundColor: "#f9fafb",
+                          borderColor: "#9ca3af",
+                          transition: { duration: 0.2 },
+                        }}
+                        transition={{ delay: i * 0.05, duration: 0.3 }}
                       >
                         {tech}
                       </motion.span>
@@ -300,12 +321,17 @@ export default function Portfolio() {
                       <motion.span
                         key={i}
                         className="bg-gray-100 px-2.5 py-1 rounded text-xs border border-gray-200 cursor-pointer"
-                        variants={techItemVariants}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover="hover"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{
+                          scale: 1.05,
+                          backgroundColor: "#f9fafb",
+                          borderColor: "#9ca3af",
+                          transition: { duration: 0.2 },
+                        }}
                         transition={{
-                          delay: (i + techStack.frontend.length) * 0.1,
+                          delay: (i + techStack.frontend.length) * 0.05,
+                          duration: 0.3,
                         }}
                       >
                         {tech}
@@ -321,16 +347,21 @@ export default function Portfolio() {
                       <motion.span
                         key={i}
                         className="bg-gray-100 px-2.5 py-1 rounded text-xs border border-gray-200 cursor-pointer"
-                        variants={techItemVariants}
-                        initial="hidden"
-                        animate="visible"
-                        whileHover="hover"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{
+                          scale: 1.05,
+                          backgroundColor: "#f9fafb",
+                          borderColor: "#9ca3af",
+                          transition: { duration: 0.2 },
+                        }}
                         transition={{
                           delay:
                             (i +
                               techStack.frontend.length +
                               techStack.backend.length) *
-                            0.1,
+                            0.05,
+                          duration: 0.3,
                         }}
                       >
                         {tech}
@@ -486,49 +517,57 @@ export default function Portfolio() {
 
             {/* Testimonial Card */}
             <motion.div
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 relative"
               variants={cardVariants}
               whileHover="hover"
             >
-              {/* <div className="mb-5">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Recommendations
-                </h2>
-              </div> */}
               <AnimatePresence mode="wait">
-                <motion.p
+                <motion.div
                   key={currentTestimonial}
-                  className="text-gray-700 italic mb-3 text-sm leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  "{testimonials[currentTestimonial].quote}"
-                </motion.p>
+                  <motion.p className="text-gray-700 italic mb-3 text-sm leading-relaxed">
+                    "{testimonials[currentTestimonial].quote}"
+                  </motion.p>
+                  <div>
+                    <div className="font-medium text-sm">
+                      {testimonials[currentTestimonial].author}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {testimonials[currentTestimonial].position}
+                    </div>
+                  </div>
+                </motion.div>
               </AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div className="font-medium text-sm">
-                  {testimonials[currentTestimonial].author}
-                </div>
-                <div className="text-xs text-gray-600">
-                  {testimonials[currentTestimonial].position}
-                </div>
-              </motion.div>
+
+              {/* Navigation Dots */}
+              <div className="flex justify-center gap-2 mt-4">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial
+                        ? "bg-gray-800 w-6"
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                  />
+                ))}
+              </div>
             </motion.div>
 
             {/* Contact Card */}
             <motion.div
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-4"
               variants={cardVariants}
               whileHover="hover"
             >
               <motion.h2
-                className="text-lg font-semibold mb-4"
+                className="text-lg font-semibold"
                 variants={itemVariants}
               >
                 Contact
