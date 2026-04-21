@@ -20,6 +20,11 @@ export default function Portfolio() {
   };
 
   const experiences = [
+    {
+      role: "Documentation Assistant / Outbound Processor",
+      company: "Royale Cold Storage",
+      year: "Present",
+    },
     { role: "Software Engineer Intern", company: "FullSuite", year: "2025" },
     {
       role: "Thesis Assistant Programmer",
@@ -125,7 +130,7 @@ export default function Portfolio() {
     },
     hover: {
       scale: 1.1,
-      backgroundColor: "#3b82f6",
+      backgroundColor: "#0C0D0F",
       color: "#ffffff",
       transition: {
         duration: 0.2,
@@ -151,7 +156,7 @@ export default function Portfolio() {
     <div className="min-h-screen bg-gray-50">
       {/* Main Container */}
       <motion.div
-        className="max-w-4xl mx-auto px-4 py-6"
+        className="max-w-6xl mx-auto px-4 py-6"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -224,10 +229,10 @@ export default function Portfolio() {
           </div>
         </motion.div>
 
-        {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main Grid Layout - Simple grid, cards grow naturally */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - 2/3 width */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-6">
             {/* About Card */}
             <motion.div
               className="bg-white rounded-xl shadow-sm border border-gray-200 p-5"
@@ -419,15 +424,15 @@ export default function Portfolio() {
           </div>
 
           {/* Right Column - 1/3 width */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Experience Card */}
             <motion.div
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-5"
               variants={cardVariants}
               whileHover="hover"
             >
               <motion.h2
-                className="text-lg font-semibold mb-6 text-gray-900"
+                className="text-lg font-semibold mb-4 text-gray-900"
                 variants={itemVariants}
               >
                 Experience
@@ -464,7 +469,7 @@ export default function Portfolio() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 pb-6">
+                    <div className="flex-1 pb-5">
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1 min-w-0">
                           <h3 className="font-semibold text-sm text-gray-900 leading-snug">
@@ -490,11 +495,6 @@ export default function Portfolio() {
               variants={cardVariants}
               whileHover="hover"
             >
-              {/* <div className="mb-5">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Recommendations
-                </h2>
-              </div> */}
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentTestimonial}
@@ -568,7 +568,7 @@ export default function Portfolio() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="block w-full text-left text-sm py-3 px-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200 group"
+                    className="block w-full text-left text-sm py-2.5 px-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200 group"
                     variants={itemVariants}
                     whileHover={{
                       backgroundColor: "#f8fafc",
@@ -612,7 +612,7 @@ export default function Portfolio() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          © 2025 Jerome Millares. All rights reserved.
+          © 2026 Jerome Millares. All rights reserved.
         </motion.div>
       </motion.div>
     </div>
