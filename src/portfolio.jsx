@@ -212,7 +212,7 @@ export default function Portfolio() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                Documentation Assistant
+                Documentation Associate
               </motion.div>
               <motion.div
                 className="flex gap-2"
