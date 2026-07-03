@@ -406,8 +406,6 @@ export default function Portfolio() {
     { label: "Schedule a Call",     href: "https://calendly.com/jmillares0945/30min" },
     { label: "GitHub @jrmmllrs",    href: "https://github.com/jrmmllrs" },
     { label: "LinkedIn /jrmmllrs",  href: "https://linkedin.com/in/jrmmllrs" },
-    { label: "Portfolio on Vercel", href: "https://vercel.com/jeromes-projects-1b97e0bd" },
-    { label: "Discord Community",   href: "https://discord.gg/your-community" },
   ];
 
   useEffect(() => {
