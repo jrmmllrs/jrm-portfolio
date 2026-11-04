@@ -1,0 +1,82 @@
+.pv {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 24px 40px;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  font:
+    15px/1.7 "Geist",
+    system-ui,
+    sans-serif;
+}
+.pv-back {
+  display: inline-block;
+  font:
+    12px "Geist Mono",
+    ui-monospace,
+    monospace;
+  color: var(--mut);
+  margin-bottom: 36px;
+  transition: color 0.2s;
+}
+.pv-back:hover {
+  color: var(--acc);
+}
+.pv h1 {
+  font:
+    400 clamp(30px, 5vw, 42px)/1.1 "Geist Mono",
+    ui-monospace,
+    monospace;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+.pv-meta {
+  font:
+    12px "Geist Mono",
+    ui-monospace,
+    monospace;
+  color: var(--mut);
+  margin-bottom: 32px;
+}
+.pv h2 {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 36px 0 10px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.pv p {
+  opacity: 0.9;
+  margin-bottom: 14px;
+}
+.pv ul {
+  margin: 0 0 14px 20px;
+  opacity: 0.9;
+}
+.pv li {
+  margin-bottom: 8px;
+}
+.pv a:not(.pv-back) {
+  color: var(--acc);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pv strong {
+  font-weight: 600;
+}
+.pv-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--mut);
+}
+@media (max-width: 480px) {
+  .pv {
+    padding: 40px 16px 32px;
+  }
+}
