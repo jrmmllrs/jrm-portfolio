@@ -7,7 +7,7 @@ import Privacy from "./Privacy";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const EMAIL = "jeromemillares.dev@gmail.com";
+const EMAIL = "jmillares.dev@gmail.com";
 const CAL = "https://calendly.com/jmillares0945/30min";
 const GH = "https://github.com/jrmmllrs";
 const LI = "https://linkedin.com/in/jrmmllrs";
@@ -136,6 +136,23 @@ const Icon = ({ d }) => (
     <path d={d} />
   </svg>
 );
+const Logo = ({ src, fb, name }) => {
+  const [bad, setBad] = useState(false);
+  return (
+    <span className="lg">
+      {bad ? (
+        fb
+      ) : (
+        <img
+          src={src}
+          alt={`${name} logo`}
+          loading="lazy"
+          onError={() => setBad(true)}
+        />
+      )}
+    </span>
+  );
+};
 const SIDE = [
   ["code", "GitHub", GH],
   ["user", "LinkedIn", LI],
@@ -143,13 +160,31 @@ const SIDE = [
   ["cal", "Schedule a call", CAL],
 ];
 const AFF = [
-  ["RC", "Royale Cold Storage", "Documentation · now"],
-  ["FS", "FullSuite", "SWE intern · 2025"],
-  ["PSU", "Pangasinan State U", "BSIT · 2020"],
+  {
+    logo: "/royale.png",
+    fb: "RC",
+    name: "Royale Cold Storage",
+    role: "Documentation Associate",
+    when: "Present",
+  },
+  {
+    logo: "/fullsuite.png",
+    fb: "FS",
+    name: "FullSuite",
+    role: "Software Engineering Intern",
+    when: "2025",
+  },
+  {
+    logo: "/psu.png",
+    fb: "PSU",
+    name: "Pangasinan State University",
+    role: "BS Information Technology",
+    when: "2020",
+  },
 ];
 const STATS = [
   [7, "+", "Years coding", "#experience"],
-  [4, "", "Live projects", "#projects"],
+  [5, "", "Live projects", "#projects"],
   [4, "", "Certifications", "#certifications"],
 ];
 const manila = () =>
@@ -419,7 +454,7 @@ function Home() {
             "-=1",
           )
           .from(
-            ".cell",
+            ".cell, .ac",
             { opacity: 0, y: 14, duration: 0.7, stagger: 0.07 },
             "-=0.5",
           )
@@ -754,14 +789,15 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="cells aff">
-              {AFF.map(([lg, t, l]) => (
-                <div className="cell" key={t}>
-                  <span className="lg">{lg}</span>
-                  <span className="ct">
-                    <strong>{t}</strong>
-                    <small>{l}</small>
-                  </span>
+            <div className="aff">
+              {AFF.map((a) => (
+                <div className="ac" key={a.name}>
+                  <div className="ac-top">
+                    <Logo src={a.logo} fb={a.fb} name={a.name} />
+                    <span className="ac-when">{a.when}</span>
+                  </div>
+                  <strong>{a.name}</strong>
+                  <small>{a.role}</small>
                 </div>
               ))}
             </div>
