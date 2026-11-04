@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import Lenis from "lenis"
+import Lenis from "lenis";
 import Privacy from "./Privacy";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -32,27 +32,33 @@ const shot = (u) =>
   `https://s0.wp.com/mshots/v1/${encodeURIComponent(u)}?w=1000&h=625`;
 const PROJECTS = [
   {
-    n: "CafeNova",
-    t: "Point of sale",
-    d: "Coffee shop POS system.",
-    u: "https://coffee-shop-frontend.vercel.app",
+    n: "VAFlow",
+    t: "Workflow platform",
+    d: "Task and workflow management for virtual assistant teams.",
+    u: "https://vaflow.jrmmllrs.online",
   },
   {
-    n: "Diego Dental",
-    t: "Booking",
-    d: "Appointment booking for a dental clinic.",
-    u: "https://diego-dental.vercel.app",
+    n: "Your Dental Care",
+    t: "Clinic management",
+    d: "Booking and patient management for a dental clinic.",
+    u: "https://yourdentalcare.vercel.app",
+  },
+  {
+    n: "RentaKo",
+    t: "Property management",
+    d: "Rental management app for tracking properties, tenants and payments.",
+    u: "https://rentako.vercel.app",
   },
   {
     n: "SuiteLifer",
-    t: "Team project",
-    d: "Collaborative full-stack development.",
+    t: "Company platform",
+    d: "Production web app built with a team during my FullSuite internship.",
     u: "https://suitelifer.com",
   },
   {
     n: "KriyaHR ATS",
     t: "HR tech",
-    d: "Applicant tracking system for HR teams.",
+    d: "Applicant tracking system for managing job posts, candidates and hiring stages.",
     u: "https://ats.kriyahr.com",
   },
 ].map((p, i) => ({
@@ -458,28 +464,24 @@ function Home() {
           });
         }
 
-        gsap.utils
-          .toArray(".sh .ln")
-          .forEach((el) =>
-            gsap.from(el, {
-              scaleX: 0,
-              duration: 1.2,
-              ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 92%" },
-            }),
-          );
-        gsap.utils
-          .toArray(".list")
-          .forEach((el) =>
-            gsap.from(el.children, {
-              opacity: 0,
-              y: 14,
-              duration: 0.7,
-              stagger: 0.07,
-              ease: "power2.out",
-              scrollTrigger: { trigger: el, start: "top 88%" },
-            }),
-          );
+        gsap.utils.toArray(".sh .ln").forEach((el) =>
+          gsap.from(el, {
+            scaleX: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 92%" },
+          }),
+        );
+        gsap.utils.toArray(".list").forEach((el) =>
+          gsap.from(el.children, {
+            opacity: 0,
+            y: 14,
+            duration: 0.7,
+            stagger: 0.07,
+            ease: "power2.out",
+            scrollTrigger: { trigger: el, start: "top 88%" },
+          }),
+        );
         gsap.from(".big", {
           yPercent: 40,
           opacity: 0,
@@ -489,16 +491,14 @@ function Home() {
         });
       });
 
-      gsap.utils
-        .toArray("section[id]")
-        .forEach((s) =>
-          ScrollTrigger.create({
-            trigger: s,
-            start: "top 45%",
-            end: "bottom 45%",
-            onToggle: (t) => t.isActive && setCur(s.id),
-          }),
-        );
+      gsap.utils.toArray("section[id]").forEach((s) =>
+        ScrollTrigger.create({
+          trigger: s,
+          start: "top 45%",
+          end: "bottom 45%",
+          onToggle: (t) => t.isActive && setCur(s.id),
+        }),
+      );
     },
     { scope: root },
   );
