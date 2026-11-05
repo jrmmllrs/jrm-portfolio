@@ -4,6 +4,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
 import Privacy from "./Privacy";
+import {
+  Code, Monitor, Smartphone, Rocket, PencilLine, FileText, CalendarDays, Sun, Moon,
+} from "lucide-react";
+import { FaGithub, FaLinkedinIn, FaAws } from "react-icons/fa6";
+import {
+  SiReact, SiTypescript, SiTailwindcss, SiGreensock, SiNodedotjs, SiLaravel, SiFirebase,
+  SiMysql, SiVercel, SiGithubactions, SiPython, SiPhp, SiFlutter,
+} from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -83,6 +91,7 @@ const STACK = [
   ["Backend", ["Node.js", "Laravel", "Firebase", "MySQL"]],
   ["Cloud", ["AWS", "Vercel", "GitHub Actions"]],
   ["Other", ["Python", "PHP", "Flutter"]],
+  ["AI tools", ["Claude", "ChatGPT", "DeepSeek"]],
 ];
 const CERTS = [
   ["React Basics", "Meta / Coursera"],
@@ -122,20 +131,27 @@ const Head = ({ n, label, right }) => (
     <span className="ln" />
   </div>
 );
-const IC = {
-  code: "M8 8l-4 4 4 4M16 8l4 4-4 4",
-  user: "M20 21v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
-  file: "M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5",
-  cal: "M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z",
-  monitor: "M3 5h18v11H3zM8 20h8M12 16v4",
-  sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4",
-  moon: "M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z",
+// UI icons: Lucide. Brand logos: Font Awesome / Simple Icons (react-icons).
+const ICONS = {
+  code: Code, monitor: Monitor, phone: Smartphone, rocket: Rocket, pen: PencilLine,
+  file: FileText, cal: CalendarDays, sun: Sun, moon: Moon,
+  github: FaGithub, linkedin: FaLinkedinIn,
 };
-const Icon = ({ d }) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d={d} />
-  </svg>
-);
+const Icon = ({ n }) => {
+  const C = ICONS[n];
+  return <C aria-hidden="true" className={n === "github" || n === "linkedin" ? "brand" : undefined} />;
+};
+
+// tech logos for the stack section: [icon, brand colour shown on hover]
+const TECH = {
+  React: [SiReact, "#61DAFB"], TypeScript: [SiTypescript, "#3178C6"],
+  "Tailwind CSS": [SiTailwindcss, "#06B6D4"], GSAP: [SiGreensock, "#88CE02"],
+  "Node.js": [SiNodedotjs, "#5FA04E"], Laravel: [SiLaravel, "#FF2D20"],
+  Firebase: [SiFirebase, "#FFCA28"], MySQL: [SiMysql, "#4479A1"],
+  AWS: [FaAws, "#FF9900"], Vercel: [SiVercel, "#8b8b92"],
+  "GitHub Actions": [SiGithubactions, "#2088FF"], Python: [SiPython, "#3776AB"],
+  PHP: [SiPhp, "#777BB4"], Flutter: [SiFlutter, "#54C5F8"],
+};
 const Logo = ({ src, fb, name }) => {
   const [bad, setBad] = useState(false);
   return (
@@ -154,8 +170,8 @@ const Logo = ({ src, fb, name }) => {
   );
 };
 const SIDE = [
-  ["code", "GitHub", GH],
-  ["user", "LinkedIn", LI],
+  ["github", "GitHub", GH],
+  ["linkedin", "LinkedIn", LI],
   ["file", "Resume", RESUME],
   ["cal", "Schedule a call", CAL],
 ];
@@ -329,6 +345,170 @@ function Contrib() {
   );
 }
 
+// inline highlighted words in the bio
+const Chip = ({ ic, children }) => (
+  <span
+    className="chip"
+    onMouseEnter={(e) =>
+      gsap.fromTo(
+        e.currentTarget.querySelector("svg"),
+        { rotate: -18, scale: 0.8 },
+        { rotate: 0, scale: 1, duration: 0.6, ease: "elastic.out(1,0.4)" },
+      )
+    }
+  >
+    <Icon n={ic} />
+    {children}
+  </span>
+);
+
+// logos live in /public/ai (trademarks of their owners, shown only to name the tools I use)
+const AI_LOGOS = ["openai", "claude-color", "deepseek-color"];
+const AI_ICON = { ChatGPT: "openai", Claude: "claude-color", DeepSeek: "deepseek-color" };
+
+// "generative AI" chip: overlapping logo bubbles
+const AiChip = ({ children }) => (
+  <span
+    className="chip ai"
+    onMouseEnter={(e) =>
+      gsap.fromTo(
+        e.currentTarget.querySelectorAll(".aic"),
+        { y: 0 },
+        { y: -3, yoyo: true, repeat: 1, stagger: 0.07, duration: 0.2, ease: "power2.out" },
+      )
+    }
+  >
+    <span className="ais" aria-hidden="true">
+      {AI_LOGOS.map((f) => (
+        <span className="aic" key={f}>
+          <img src={`/ai/${f}.svg`} alt="" />
+        </span>
+      ))}
+    </span>
+    {children}
+  </span>
+);
+
+// how far your time is from the visitor's (handy for remote roles)
+const tzHint = () => {
+  const h = (480 + new Date().getTimezoneOffset()) / 60; // Manila is UTC+8
+  if (Math.abs(h) < 0.1) return "same time zone as you";
+  const n = Number.isInteger(h) ? Math.abs(h) : Math.abs(h).toFixed(1);
+  return `${n}h ${h > 0 ? "ahead of" : "behind"} you`;
+};
+
+const TT_TEXTS = [
+  "Good software is built from small, careful decisions made one after another.",
+  "Ship early, measure honestly and keep the code easy to change.",
+  "Every bug is a story about an assumption that turned out to be wrong.",
+  "Simple interfaces hide a lot of hard work and respect the time of the person using them.",
+];
+
+// Alt + J typing test
+function TypingTest({ onClose, onRetry }) {
+  const box = useRef(null);
+  const inp = useRef(null);
+  const [text] = useState(
+    () => TT_TEXTS[Math.floor(Math.random() * TT_TEXTS.length)],
+  );
+  const [val, setVal] = useState("");
+  const [t0, setT0] = useState(0);
+  const [res, setRes] = useState(null);
+  const best = Number(localStorage.getItem("ttBest") || 0);
+
+  const change = (e) => {
+    if (res) return;
+    const v = e.target.value.slice(0, text.length);
+    const start = t0 || Date.now();
+    if (!t0) setT0(start);
+    setVal(v);
+    if (v.length === text.length) {
+      const mins = Math.max((Date.now() - start) / 60000, 1 / 600);
+      let ok = 0;
+      for (let i = 0; i < v.length; i++) if (v[i] === text[i]) ok++;
+      const wpm = Math.round(text.length / 5 / mins);
+      if (wpm > best) localStorage.setItem("ttBest", String(wpm));
+      setRes({ wpm, acc: Math.round((ok / text.length) * 100), best: Math.max(best, wpm) });
+    }
+  };
+
+  useGSAP(
+    () => {
+      gsap.fromTo(box.current.parentNode, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+      gsap.fromTo(
+        box.current,
+        { y: -14, scale: 0.98, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" },
+      );
+    },
+    { scope: box },
+  );
+  useGSAP(
+    () => {
+      if (res)
+        gsap.from(".ttr > div", { opacity: 0, y: 10, stagger: 0.08, duration: 0.5, ease: "power2.out" });
+    },
+    { scope: box, dependencies: [res] },
+  );
+
+  return (
+    <div className="pal" onClick={onClose}>
+      <div
+        className="pb tt"
+        ref={box}
+        role="dialog"
+        aria-label="Typing test"
+        onClick={(e) => {
+          e.stopPropagation();
+          inp.current?.focus();
+        }}
+      >
+        <div className="tth">
+          <span>Typing test</span>
+          <span>{best ? `Best ${best} wpm · ` : ""}Esc to close</span>
+        </div>
+        <p className="ttx" aria-hidden="true">
+          {[...text].map((ch, i) => (
+            <span
+              key={i}
+              className={i < val.length ? (val[i] === ch ? "ok" : "bad") : i === val.length ? "cu" : ""}
+            >
+              {ch}
+            </span>
+          ))}
+        </p>
+        <input
+          ref={inp}
+          autoFocus
+          className="tti"
+          value={val}
+          onChange={change}
+          aria-label="Type the sentence shown above"
+          autoComplete="off"
+          autoCapitalize="off"
+          autoCorrect="off"
+          spellCheck={false}
+        />
+        {res ? (
+          <>
+            <div className="ttr">
+              <div><b>{res.wpm}</b><small>WPM</small></div>
+              <div><b>{res.acc}%</b><small>Accuracy</small></div>
+              <div><b>{res.best}</b><small>Best</small></div>
+            </div>
+            <div className="tta">
+              <button className="btn p" onClick={onRetry}>Try again</button>
+              <button className="btn" onClick={onClose}>Close</button>
+            </div>
+          </>
+        ) : (
+          <p className="tth">Start typing to begin the timer.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   const root = useRef(null);
   const lenis = useRef(null);
@@ -343,6 +523,10 @@ function Home() {
   const [pal, setPal] = useState(false);
   const [q, setQ] = useState("");
   const [sel, setSel] = useState(0);
+  const [tt, setTt] = useState(false);
+  const [ttKey, setTtKey] = useState(0);
+  const [toast, setToast] = useState("");
+  const toastT = useRef(null);
 
   useEffect(() => {
     const mq = matchMedia("(prefers-color-scheme: light)");
@@ -380,16 +564,26 @@ function Home() {
     };
   }, []);
 
-  // Alt/Ctrl/Cmd + K opens quick nav
+  // Alt/Ctrl/Cmd + K = quick nav, Alt + J = typing test, Esc closes
   useEffect(() => {
     const k = (e) => {
-      if ((e.altKey || e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      const key = e.key.toLowerCase();
+      if ((e.altKey || e.ctrlKey || e.metaKey) && (e.code === "KeyK" || key === "k")) {
         e.preventDefault();
+        setTt(false);
         setPal((p) => !p);
         setQ("");
         setSel(0);
       }
-      if (e.key === "Escape") setPal(false);
+      if (e.altKey && (e.code === "KeyJ" || key === "j")) {
+        e.preventDefault();
+        setPal(false);
+        setTt((t) => !t);
+      }
+      if (e.key === "Escape") {
+        setPal(false);
+        setTt(false);
+      }
     };
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
@@ -402,10 +596,16 @@ function Home() {
       ? lenis.current.scrollTo(el, { offset: innerWidth <= 900 ? -72 : -10 })
       : el.scrollIntoView({ behavior: "smooth" });
   };
+  const say = (m) => {
+    setToast(m);
+    clearTimeout(toastT.current);
+    toastT.current = setTimeout(() => setToast(""), 2000);
+  };
   const copy = () => {
     navigator.clipboard?.writeText(EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
+    say("✓ Email copied to clipboard");
   };
   const open = (u) => window.open(u, "_blank", "noopener");
 
@@ -416,6 +616,7 @@ function Home() {
     { l: "Open resume", f: () => open(RESUME) },
     { l: "Open GitHub", f: () => open(GH) },
     { l: "Open LinkedIn", f: () => open(LI) },
+    { l: "Typing test", f: () => setTt(true) },
     {
       l: "Privacy policy",
       f: () => {
@@ -452,6 +653,11 @@ function Home() {
             ".hero .tx > *",
             { opacity: 0, y: 16, duration: 0.8, stagger: 0.09 },
             "-=1",
+          )
+          .from(
+            ".chip",
+            { opacity: 0, scale: 0.7, y: 6, duration: 0.55, stagger: 0.09, ease: "back.out(2.2)" },
+            "-=0.6",
           )
           .from(
             ".cell, .ac",
@@ -665,6 +871,14 @@ function Home() {
     { scope: root, dependencies: [pal] },
   );
 
+  useGSAP(
+    () => {
+      if (toast)
+        gsap.fromTo(".toast", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" });
+    },
+    { scope: root, dependencies: [toast] },
+  );
+
   const Q = QUOTES[qi];
 
   return (
@@ -686,7 +900,7 @@ function Home() {
         <nav className="sl" aria-label="Links">
           {SIDE.map(([ic, l, h]) => (
             <a key={l} href={h} target="_blank" rel="noopener noreferrer">
-              <Icon d={IC[ic]} />
+              <Icon n={ic} />
               {l}
             </a>
           ))}
@@ -721,7 +935,19 @@ function Home() {
             </span>
             <span className="kbd">Alt K</span>
           </button>
-          <div className="hide-m clock">Pangasinan · {time}</div>
+          <button
+            className="kb hide-m"
+            onClick={() => setTt(true)}
+            aria-label="Open typing test"
+          >
+            <span>Typing test</span>
+            <span className="kbd">Alt J</span>
+          </button>
+          <div className="hide-m clock">
+            Pangasinan · {time}
+            <br />
+            <span className="tz">{tzHint()}</span>
+          </div>
           <i className="sep hide-m" />
           <div className="tg" role="group" aria-label="Theme">
             {[
@@ -736,7 +962,7 @@ function Home() {
                 aria-pressed={theme === t}
                 onClick={() => setTheme(t)}
               >
-                <Icon d={IC[ic]} />
+                <Icon n={ic} />
               </button>
             ))}
           </div>
@@ -759,21 +985,24 @@ function Home() {
                 <i aria-hidden="true" />
               </div>
               <div className="tx">
-                <p className="av">
+                {/* <p className="av">
                   <span className="dot" />
                   {CO
                     ? `Hi ${CO}, I’m open to ${ROLE} roles`
-                    : `Open to ${ROLE} roles`}
-                </p>
+                    : `Open to ${ROLE} roles · Pangasinan, PH`}
+                </p> */}
                 <h1>Jerome Millares</h1>
-                <p>
-                  I’m a full-stack developer. I build fast, clean web apps with
-                  React, Node.js and Python, and I’m based in Pangasinan, PH,
-                  working globally.
+                <p className="bio">
+                  I’m a <Chip ic="code">full-stack</Chip> engineer. I build
+                  modern <Chip ic="monitor">web</Chip> &amp;{" "}
+                  <Chip ic="phone">mobile apps</Chip>, and these days I’m
+                  focused on <AiChip>generative AI</AiChip>.
                 </p>
-                <p>
-                  I care about clean code, thoughtful UX and shipping things
-                  that actually work.
+                <p className="bio">
+                  Right now I’m building{" "}
+                  <Chip ic="rocket">cool new stuff</Chip> every day. I love
+                  turning <Chip ic="pen">rough ideas</Chip> into things people
+                  actually use.
                 </p>
                 <div className="soc">
                   <a href={GH} target="_blank" rel="noopener noreferrer">
@@ -923,7 +1152,18 @@ function Home() {
                   <span>{k}</span>
                   <div className="tags">
                     {v.map((t) => (
-                      <span key={t}>{t}</span>
+                      <span key={t} style={TECH[t] ? { "--c": TECH[t][1] } : undefined}>
+                        {AI_ICON[t] ? (
+                          <img
+                            className={`ti${AI_ICON[t] === "openai" ? " mono" : ""}`}
+                            src={`/ai/${AI_ICON[t]}.svg`}
+                            alt=""
+                          />
+                        ) : (
+                          TECH[t] && (() => { const T = TECH[t][0]; return <T className="ti brand" aria-hidden="true" />; })()
+                        )}
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -997,6 +1237,20 @@ function Home() {
           </footer>
         </div>
       </main>
+
+      {tt && (
+        <TypingTest
+          key={ttKey}
+          onClose={() => setTt(false)}
+          onRetry={() => setTtKey((k) => k + 1)}
+        />
+      )}
+
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+        </div>
+      )}
 
       {pal && (
         <div className="pal" onClick={() => setPal(false)}>

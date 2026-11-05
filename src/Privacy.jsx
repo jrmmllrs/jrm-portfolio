@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./privacy.css";
 
 const EMAIL = "jeromemillares.dev@gmail.com";
-const UPDATED = "November 4, 2026";
+const UPDATED = "November 5, 2026";
 
 export default function Privacy() {
   useEffect(() => {
@@ -40,8 +40,7 @@ export default function Privacy() {
       </p>
       <p>
         <strong>Information stored in your browser.</strong> The Site saves your
-        theme preference (light, dark, or system) in your browser's local
-        storage. This stays on your device, is never sent to me, and you can
+        theme preference (light, dark, or system), and your best score if you try the typing test, in your browser's local storage. This stays on your device, is never sent to me, and you can
         clear it at any time.
       </p>
       <p>

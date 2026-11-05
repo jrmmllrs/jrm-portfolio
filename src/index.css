@@ -217,8 +217,21 @@ main{overflow-x:clip}
   .ph img{object-position:50% 18%}
   .tx h1{font-size:34px;margin-bottom:16px}
   .tx p:not(.av){font-size:15px}
-  .soc{gap:8px;margin-top:20px}
-  .soc a{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:99px}
+.soc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.soc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 0;
+}
 
   /* affiliations → swipeable cards */
   .aff{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:28px calc(var(--px)*-1) 16px;padding:0 var(--px);scroll-padding:0 var(--px);scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -275,3 +288,45 @@ main{overflow-x:clip}
   .ac:hover{transform:none;border-color:var(--line)}
   .tags span:hover{border-color:var(--line);color:inherit}
 }
+
+/* ── bio chips ── */
+.tx .bio{line-height:2.05}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:1px 11px 1px 9px;margin:0 1px;border-radius:99px;background:color-mix(in srgb,var(--fg) 8%,transparent);border:1px solid var(--line);font-weight:500;color:var(--fg);line-height:1.5;transition:background .25s,border-color .25s}
+.chip:hover{background:color-mix(in srgb,var(--acc) 14%,transparent);border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.chip svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tz{opacity:.7}
+
+/* ── typing test + toast ── */
+.tt{position:relative;padding:20px 22px 22px}
+.tth{display:flex;justify-content:space-between;gap:12px;font:12px "Geist Mono",monospace;color:var(--mut)}
+.ttx{font:400 19px/1.8 "Geist Mono",monospace;letter-spacing:-.01em;margin:16px 0;white-space:pre-wrap;color:var(--mut);cursor:text}
+.ttx .ok{color:var(--fg)}
+.ttx .bad{color:#ff6b6b;text-decoration:underline}
+.ttx .cu{background:color-mix(in srgb,var(--acc) 30%,transparent);border-radius:3px;color:var(--fg)}
+.pb input.tti{position:absolute;opacity:0;pointer-events:none;width:0;height:0;padding:0;border:0}
+.ttr{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:12px;padding-top:14px}
+.ttr b{display:block;font:400 28px "Geist Mono",monospace;letter-spacing:-.03em}
+.ttr small{font:11px "Geist Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.tta{display:flex;gap:10px;margin-top:18px}
+.toast{position:fixed;bottom:28px;left:0;right:0;margin:0 auto;width:max-content;max-width:90vw;z-index:130;background:var(--fg);color:var(--bg);border-radius:99px;padding:9px 18px;font:500 13px "Geist Mono",monospace}
+@media(max-width:480px){.ttx{font-size:16px}.tt{padding:16px}}
+
+/* ── generative AI chip ── */
+.chip.ai{padding-left:5px}
+.ais{display:inline-flex;align-items:center}
+.aic{width:20px;height:20px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;border:2px solid var(--bg);margin-left:-7px}
+.aic:first-child{margin-left:0}
+.aic svg{width:11px;height:11px}
+
+/* ── AI logos ── */
+.aic{background:#fff;border:0;box-shadow:0 0 0 2px var(--bg);width:21px;height:21px}
+.aic img{width:12px;height:12px;display:block}
+.tags span{display:inline-flex;align-items:center;gap:7px}
+.ti{width:13px;height:13px;display:block}
+:root:not([data-theme=light]) .ti.mono{filter:invert(1)}
+
+/* ── icon polish ── */
+.side svg.brand{fill:currentColor;stroke:none;width:14px;height:14px}
+.chip svg{stroke-width:1.9}
+.ti.brand{fill:currentColor;stroke:none;transition:color .2s}
+.tags span:hover .ti.brand{color:var(--c,var(--acc))}
