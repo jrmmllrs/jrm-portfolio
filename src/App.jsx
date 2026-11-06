@@ -1227,9 +1227,9 @@ function Home() {
           <footer>
             <span>© 2026 Jerome Millares</span>
             <span style={{ display: "flex", gap: 18 }}>
-              <a className="mono" href="/privacy">
+              {/* <a className="mono" href="/privacy">
                 Privacy Policy
-              </a>
+              </a> */}
               <button className="mono" onClick={() => goTo("#top")}>
                 Back to top ↑
               </button>
