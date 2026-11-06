@@ -374,7 +374,7 @@ export default function Portfolio() {
   ];
 
   const experiences = [
-    { role: "Documentation Associate / Outbound Processor", company: "Royale Cold Storage", year: "Now", now: true },
+    { role: "Documentation Associate / DR Processor", company: "Royale Cold Storage", year: "Now", now: true },
     { role: "Software Engineer Intern", company: "FullSuite", year: "2025" },
     { role: "Capstone Programmer", company: "Pangasinan State University", year: "2024" },
     { role: "BS Information Technology", company: "Pangasinan State University", year: "2020" },

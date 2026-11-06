@@ -78,7 +78,7 @@ const PROJECTS = [
 const EXP = [
   [
     "Now",
-    "Documentation Associate / Outbound Processor",
+    "Documentation Associate / DR Processor",
     "Royale Cold Storage",
   ],
   ["2025", "Software Engineer Intern", "FullSuite"],
